@@ -22,7 +22,7 @@ const LoginButton = ({
 if(mode === 'modal'){
   return (
     <span>
-      TO DO : Implement modal
+      {/* TO DO : Implement modal */}
     </span>
   );
 }
