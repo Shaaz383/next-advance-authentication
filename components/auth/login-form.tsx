@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import { LoginSchema } from '@/schemas'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import { FormError } from './form-error'
+import { FormSucess } from './form-success'
 
 
 const onSubmit = (values: z.infer<typeof LoginSchema>) => {
@@ -81,6 +83,9 @@ const LoginForm = () => {
 
 
           </div>
+
+          <FormError message=''/>
+          <FormSucess message=''/>
 
           <Button type='submit' className='w-full'>
                 Login
