@@ -21,7 +21,7 @@ import { useSearchParams } from 'next/navigation'
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
-  const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use " : "Invalid credentials "
+  const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use " : ""
 
 
   const [error , setError] = useState<string | undefined>("");
