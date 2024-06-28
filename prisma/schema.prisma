@@ -7,9 +7,15 @@ datasource db {
 }
 
 
-generator Client {
+generator client {
   provider = "prisma-client-js"
 }
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
 
  
 model User {
@@ -19,6 +25,7 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
+  role          UserRole  @default(USER)
   accounts      Account[]
   
  
