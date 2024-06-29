@@ -12,7 +12,7 @@ import { RegisterSchema } from '@/schemas'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { FormError } from './form-error'
-import { FormSucess } from './form-success'
+import { FormSuccess } from './form-success'
 import { register } from '@/actions/register'
 
 
@@ -21,7 +21,7 @@ import { register } from '@/actions/register'
 
 
 const RegisterForm = () => {
-  const [error , setError] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
@@ -30,7 +30,7 @@ const RegisterForm = () => {
     defaultValues: {
       email: '',
       password: '',
-      name:'',
+      name: '',
     }
   })
 
@@ -40,12 +40,12 @@ const RegisterForm = () => {
     setSuccess("")
 
     startTransition(() => {
-      register(values).then((data)=>{
+      register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       })
     })
-    
+
   }
   return (
     <CardWrapper
@@ -121,11 +121,11 @@ const RegisterForm = () => {
 
           </div>
 
-          <FormError message={error}/>
-          <FormSucess message={success}/>
+          <FormError message={error} />
+          <FormSuccess message={success} />
 
           <Button type='submit' className='w-full'>
-                Create an account
+            Create an account
           </Button>
 
         </form>

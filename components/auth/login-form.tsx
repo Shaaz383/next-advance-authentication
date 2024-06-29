@@ -10,7 +10,7 @@ import { LoginSchema } from '@/schemas'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { FormError } from './form-error'
-import { FormSucess } from './form-success'
+import { FormSuccess } from './form-success'
 import { login } from '@/actions/login'
 import { useSearchParams } from 'next/navigation'
 
@@ -24,7 +24,7 @@ const LoginForm = () => {
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use " : ""
 
 
-  const [error , setError] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
@@ -42,12 +42,12 @@ const LoginForm = () => {
     setSuccess("")
 
     startTransition(() => {
-      login(values).then((data)=>{
+      login(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       })
     })
-    
+
   }
   return (
     <CardWrapper
@@ -104,11 +104,11 @@ const LoginForm = () => {
 
           </div>
 
-          <FormError message={error || urlError}/>
-          <FormSucess message={success}/>
+          <FormError message={error || urlError} />
+          <FormSuccess message={success} />
 
           <Button type='submit' className='w-full'>
-                Login
+            Login
           </Button>
 
         </form>
