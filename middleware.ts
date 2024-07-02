@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
-const {auth} = NextAuth(authConfig)
+const { auth } = NextAuth(authConfig);
 
 import {
   DEFAULT_LOGIN_REDIRECT,
@@ -8,7 +8,6 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
-
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -18,17 +17,18 @@ export default auth((req) => {
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-  if (isApiAuthRoute) return null;
+  if (isApiAuthRoute) {
+    return Response.redirect(new URL('/api/auth/fallback', nextUrl)); // Handle API auth routes appropriately
+  }
 
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-    return null;
+    return Response.json({ error: "Unauthorized" }, { status: 401 }); // Handle unauthenticated access to auth routes
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;
@@ -39,7 +39,6 @@ export default auth((req) => {
     return Response.redirect(
       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
     );
-
   }
 });
 
